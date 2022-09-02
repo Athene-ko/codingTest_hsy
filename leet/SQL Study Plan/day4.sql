@@ -16,12 +16,22 @@ union
 select product_id, 'store3' as store , store3 as price from products where store3 is not null
 order by product_id, store, price
 
--- 608. Tree Node 푸는 중
 
-select t.id
-  , case t.p_id
-      when null then 'Root'
-      when contains((select id from Tree), p_id) then 'Inner'
-      -- else 'Leaf'
-      end as type
-  from Tree t;
+
+-- 608. Tree Node 푸는 중
+-- select t.id
+--   , case t.p_id
+--       when null then 'Root'
+--       when contains((select id from Tree), p_id) then 'Inner'
+--       -- else 'Leaf'
+--       end as type
+--   from Tree t;
+select distinct T1.id, IIF(T1.p_id is null, 'Root', IIF(T2.id is null, 'Leaf', 'Inner')) as type
+from Tree T1 left join Tree T2 on T1.id = T2.p_id
+
+-- 176. Second Highest Salary
+select max(salary) SecondHighestSalary 
+from Employee
+where salary != (select max(salary) from Employee)
+
+-- 
