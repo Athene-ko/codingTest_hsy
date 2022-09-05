@@ -7,16 +7,8 @@ where w1.temperature > w2.temperature
 
 
 -- 607. Sales Person(푸는 중)
--- select o.sales_id
--- from Orders o
--- join company c
--- on o.com_id = c.com_id
--- where c.com_id != 1
-
--- select s.name
--- from SalesPerson s
--- where s.sales_id in (select o.sales_id
--- from Orders o
--- join company c
--- on o.com_id = c.com_id
--- where c.com_id != 1)
+select s.name from SalesPerson s
+where s.sales_id not in (select o.sales_id from Company c
+join Orders o
+on c.com_id = o.com_id
+where c.name = 'RED')
